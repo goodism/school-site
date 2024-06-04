@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package School_Site
+ * @package School_Theme
  */
 
 get_header();

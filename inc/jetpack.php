@@ -4,7 +4,7 @@
  *
  * @link https://jetpack.com/
  *
- * @package School_Site
+ * @package School_Theme
  */
 
 /**
@@ -14,13 +14,13 @@
  * See: https://jetpack.com/support/responsive-videos/
  * See: https://jetpack.com/support/content-options/
  */
-function school_site_jetpack_setup() {
+function school_theme_jetpack_setup() {
 	// Add theme support for Infinite Scroll.
 	add_theme_support(
 		'infinite-scroll',
 		array(
 			'container' => 'main',
-			'render'    => 'school_site_infinite_scroll_render',
+			'render'    => 'school_theme_infinite_scroll_render',
 			'footer'    => 'page',
 		)
 	);
@@ -33,7 +33,7 @@ function school_site_jetpack_setup() {
 		'jetpack-content-options',
 		array(
 			'post-details' => array(
-				'stylesheet' => 'school-site-style',
+				'stylesheet' => 'school-theme-style',
 				'date'       => '.posted-on',
 				'categories' => '.cat-links',
 				'tags'       => '.tags-links',
@@ -48,13 +48,13 @@ function school_site_jetpack_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'school_site_jetpack_setup' );
+add_action( 'after_setup_theme', 'school_theme_jetpack_setup' );
 
-if ( ! function_exists( 'school_site_infinite_scroll_render' ) ) :
+if ( ! function_exists( 'school_theme_infinite_scroll_render' ) ) :
 	/**
 	 * Custom render function for Infinite Scroll.
 	 */
-	function school_site_infinite_scroll_render() {
+	function school_theme_infinite_scroll_render() {
 		while ( have_posts() ) {
 			the_post();
 			if ( is_search() ) :
