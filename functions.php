@@ -218,4 +218,22 @@ function fwd_change_staff_title_placeholder($title) {
 }
 add_filter('enter_title_here', 'fwd_change_staff_title_placeholder');
 
+// Change excerpt length for student page
+function student_excerpt_length($length) {
+    if (is_archive()) {
+        return 25;
+    }
+    return $length;
+}
+add_filter('excerpt_length', 'student_excerpt_length', 999);
+
+// Change default [...] ending for student page
+function student_excerpt_more( $more ) {
+    if (is_archive()) {
+        $more = '<br> <a href="' . esc_url( get_permalink() ) . '">Read More about the Student...</a>';
+    }
+    return $more;
+}
+add_filter('excerpt_more', 'student_excerpt_more', 999); 
+
 require get_template_directory() . '/inc/cpt-taxonomy.php';

@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Student List
- * 
+ * The template for displaying archive pages
+ *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package School_Theme
@@ -27,13 +27,6 @@ get_header();
                 'posts_per_page' => -1,
                 'order'          => 'ASC',
                 'orderby'        => 'title',
-                // 'tax_query'      => array(
-                //     array(
-                //         'taxonomy' => 'fwd-work-category',
-                //         'field'    => 'slug',
-                //         'terms'    => 'web'
-                //     )
-                // )
             );
             $query = new WP_Query( $args );
             
@@ -48,7 +41,11 @@ get_header();
                             <h2><?php the_title(); ?></h2>
                             <?php the_post_thumbnail('large'); ?>
                         </a>
-                        <?php the_excerpt(); ?>
+                        <?php
+                        the_excerpt();
+                        the_terms( get_the_ID(), 'position', 'Specialty: ' );
+                        ?>
+                        
                     </article>
                     <?php
                 }
