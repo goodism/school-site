@@ -236,4 +236,10 @@ function student_excerpt_more( $more ) {
 }
 add_filter('excerpt_more', 'student_excerpt_more', 999); 
 
+// Custom image size for students
+function student_image_size() {
+    add_image_size( 'student-size', 200, 300, true );
+}
+add_action('after_setup_theme', 'student_image_size');
+
 require get_template_directory() . '/inc/cpt-taxonomy.php';
