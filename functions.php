@@ -195,4 +195,18 @@ function block_align_wide() {
 }
 add_action('after_setup_theme', 'block_align_wide');
 
+// Change title placeholder for students
+function wpb_change_title_text( $title ){
+    $screen = get_current_screen();
+  
+    if  ( 'student' == $screen->post_type ) {
+         $title = 'Add student name';
+    }
+  
+    return $title;
+}
+  
+add_filter( 'enter_title_here', 'wpb_change_title_text' );
+
 // CPT
+require get_template_directory() . '/inc/cpt-taxonomy.php';
