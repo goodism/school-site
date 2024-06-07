@@ -195,6 +195,19 @@ function block_align_wide() {
 }
 add_action('after_setup_theme', 'block_align_wide');
 
+// Change title placeholder for students
+function wpb_change_title_text( $title ){
+    $screen = get_current_screen();
+  
+    if  ( 'student' == $screen->post_type ) {
+         $title = 'Add student name';
+    }
+  
+    return $title;
+}
+  
+add_filter( 'enter_title_here', 'wpb_change_title_text' );
+
 // CPT
 function fwd_register_custom_post_types() {
     $labels = array(
@@ -305,3 +318,4 @@ add_action( 'init', 'fwd_create_staff_taxonomy_terms' );
 // }
 // add_filter('enter_title_here', 'fwd_change_staff_title_placeholder');
 
+require get_template_directory() . '/inc/cpt-taxonomy.php';
