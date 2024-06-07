@@ -130,6 +130,32 @@ function fwd_register_taxonomies() {
     );
 
     register_taxonomy( 'department', array( 'fwd-staff' ), $args );
+
+    // Register student taxonomy
+    $labels = array(
+        'name'              => _x( 'Positions', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Position', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Positions' ),
+        'all_items'         => __( 'All Positions' ),
+        'parent_item'       => __( 'Parent Position' ),
+        'parent_item_colon' => __( 'Parent Position:' ),
+        'edit_item'         => __( 'Edit Position' ),
+        'update_item'       => __( 'Update Position' ),
+        'add_new_item'      => __( 'Add New Position' ),
+        'new_item_name'     => __( 'New Position Name' ),
+        'menu_name'         => __( 'Positions' ),
+    );
+
+    $args = array(
+        'hierarchical'      => true, 
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'position' ),
+    );
+
+    register_taxonomy( 'position', array( 'student' ), $args );
 }
 add_action( 'init', 'fwd_register_taxonomies' );
 
@@ -150,6 +176,23 @@ function fwd_create_staff_taxonomy_terms() {
     }
 }
 add_action( 'init', 'fwd_create_staff_taxonomy_terms' );
+
+function fwd_create_student_taxonomy_terms() {
+    if ( !term_exists( 'Designer', 'position' ) ) {
+        wp_insert_term(
+            'Designer',
+            'position'
+        );
+    }
+
+    if ( !term_exists( 'Developer', 'position' ) ) {
+        wp_insert_term(
+            'Developer',
+            'position'
+        );
+    }
+}
+add_action( 'init', 'fwd_create_student_taxonomy_terms' );
 
 // Flush permalinks
 function fwd_rewrite_flush() {
