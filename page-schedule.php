@@ -1,7 +1,4 @@
 <?php
-/*
-Template Name: Schedule Page
-*/
 
 get_header(); ?>
 

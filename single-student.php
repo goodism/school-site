@@ -69,8 +69,6 @@ get_header();
             ?>
             </div>
 
-            <?php get_template_part( 'template-parts/work-categories' ); ?>
-
         </article>
 
     <?php endwhile; ?>
