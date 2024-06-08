@@ -1,26 +1,38 @@
 <?php
+/*
+Template Name: Schedule Page
+*/
+
 get_header(); ?>
 
-<div class="schedule-container">
-    <h1><?php the_title(); ?></h1>
-    
-    <?php if( have_rows('schedule') ): ?>
-        <ul class="schedule-list">
-            <?php while( have_rows('schedule') ): the_row(); 
-                $day = get_sub_field('day');
-                $session_title = get_sub_field('session_title');
-                $time = get_sub_field('time');
-            ?>
-                <li class="schedule-item">
-                    <span class="schedule-day"><?php echo $day; ?></span>
-                    <span class="schedule-session-title"><?php echo $session_title; ?></span>
-                    <span class="schedule-time"><?php echo $time; ?></span>
-                </li>
-            <?php endwhile; ?>
-        </ul>
-    <?php else : ?>
-        <p>No schedule found</p>
-    <?php endif; ?>
-</div>
+<div id="primary" class="content-area">
+    <main id="main" class="site-main">
 
+        <?php
+        if (function_exists('have_rows') && have_rows('schedule_items')) :
+            echo '<h2>Schedule</h2>';
+            echo '<ul>';
+
+            while (have_rows('schedule_items')) : the_row();
+                $date = get_sub_field('date');
+                $course = get_sub_field('course');
+                $instructor = get_sub_field('instructor');
+
+                echo '<li>';
+                echo '<strong>Date:</strong> ' . esc_html($date) . '<br>';
+                echo '<strong>Course:</strong> ' . esc_html($course) . '<br>';
+                echo '<strong>Instructor:</strong> ' . esc_html($instructor);
+                echo '</li>';
+            endwhile;
+
+            echo '</ul>';
+        else :
+            echo '<p>No schedule items found.</p>';
+        endif;
+        ?>
+
+    </main><!-- #main -->
+</div><!-- #primary -->
+
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

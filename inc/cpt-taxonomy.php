@@ -1,5 +1,5 @@
 <?php
-function fwd_register_custom_post_types() {
+function fwd_register_custom_post_types_students() {
     
     // Register Students
     $labels = array(
@@ -53,7 +53,7 @@ function fwd_register_custom_post_types() {
     register_post_type( 'student', $args );
 
 }
-add_action( 'init', 'fwd_register_custom_post_types' );
+add_action( 'init', 'fwd_register_custom_post_types_students' );
 
 // Flush permalinks
 function fwd_rewrite_flush() {
