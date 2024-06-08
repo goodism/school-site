@@ -208,100 +208,8 @@ function fwd_change_student_title_text( $title ){
   
 add_filter( 'enter_title_here', 'fwd_change_student_title_text' );
 
-// CPT
-function fwd_register_custom_post_types() {
-    $labels = array(
-        'name'               => _x( 'Staff', 'post type general name' ),
-        'singular_name'      => _x( 'Staff Member', 'post type singular name' ),
-        'menu_name'          => _x( 'Staff', 'admin menu' ),
-        'name_admin_bar'     => _x( 'Staff Member', 'add new on admin bar' ),
-        'add_new'            => _x( 'Add New', 'staff member' ),
-        'add_new_item'       => __( 'Add New Staff Member' ),
-        'new_item'           => __( 'New Staff Member' ),
-        'edit_item'          => __( 'Edit Staff Member' ),
-        'view_item'          => __( 'View Staff Member' ),
-        'all_items'          => __( 'All Staff Members' ),
-        'search_items'       => __( 'Search Staff Members' ),
-        'parent_item_colon'  => __( 'Parent Staff Members:' ),
-        'not_found'          => __( 'No staff members found.' ),
-        'not_found_in_trash' => __( 'No staff members found in Trash.' ),
-        'archives'           => __( 'Staff Member Archives'),
-        'insert_into_item'   => __( 'Insert into staff member'),
-        'uploaded_to_this_item' => __( 'Uploaded to this staff member'),
-        'filter_item_list'   => __( 'Filter staff members list'),
-        'items_list_navigation' => __( 'Staff members list navigation'),
-        'items_list'         => __( 'Staff members list'),
-        'featured_image'     => __( 'Staff Member featured image'),
-        'set_featured_image' => __( 'Set staff member featured image'),
-        'remove_featured_image' => __( 'Remove staff member featured image'),
-        'use_featured_image' => __( 'Use as featured image'),
-    );
 
-    $args = array(
-        'labels'             => $labels,
-        'public'             => true,
-        'publicly_queryable' => true,
-        'show_ui'            => true,
-        'show_in_menu'       => true,
-        'show_in_nav_menus'  => true,
-        'show_in_admin_bar'  => true,
-        'show_in_rest'       => true,
-        'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'staff' ),
-        'capability_type'    => 'post',
-        'has_archive'        => true,
-        'hierarchical'       => false,
-        'menu_position'      => 5,
-        'menu_icon'          => 'dashicons-groups',
-        'supports'           => array( 'title' ),
-    );
-    register_post_type( 'fwd-staff', $args );
-}
-add_action( 'init', 'fwd_register_custom_post_types' );
 
-// Taxonomies
-function fwd_register_staff_taxonomy() {
-    $labels = array(
-        'name'              => _x( 'Departments', 'taxonomy general name' ),
-        'singular_name'     => _x( 'Department', 'taxonomy singular name' ),
-        'search_items'      => __( 'Search Departments' ),
-        'all_items'         => __( 'All Departments' ),
-        'parent_item'       => __( 'Parent Department' ),
-        'parent_item_colon' => __( 'Parent Department:' ),
-        'edit_item'         => __( 'Edit Department' ),
-        'update_item'       => __( 'Update Department' ),
-        'add_new_item'      => __( 'Add New Department' ),
-        'new_item_name'     => __( 'New Department Name' ),
-        'menu_name'         => __( 'Departments' ),
-    );
-
-    $args = array(
-        'hierarchical'      => true, 
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'department' ),
-    );
-
-    register_taxonomy( 'department', array( 'fwd-staff' ), $args );
-}
-add_action( 'init', 'fwd_register_staff_taxonomy' );
-
-// Taxonomy Terms
-function fwd_create_staff_taxonomy_terms() {
-    if ( !term_exists( 'Faculty', 'department' ) ) {
-        wp_insert_term(
-            'Faculty',
-            'department'
-        );
-    }
-
-    if ( !term_exists( 'Administrative', 'department' ) ) {
-        wp_insert_term(
-            'Administrative',
-            'department'
-        );
 // Change staff placeholder text
 function fwd_change_staff_title_placeholder($title) {
     $screen = get_current_screen();
@@ -343,8 +251,3 @@ register_nav_menus(
 );
 
 require get_template_directory() . '/inc/cpt-taxonomy.php';
-
-function register_footer_menu() {
-    register_nav_menu('footer-menu', __('Footer Menu'));
-}
-add_action('init', 'register_footer_menu');

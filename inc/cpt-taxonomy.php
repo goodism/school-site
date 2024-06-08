@@ -1,5 +1,5 @@
 <?php
-function fwd_register_custom_post_types_students() {
+function fwd_register_custom_post_types() {
     
     // Register student CPT
     $labels = array(
@@ -102,7 +102,7 @@ function fwd_register_custom_post_types_students() {
     register_post_type( 'fwd-staff', $args );
 
 }
-add_action( 'init', 'fwd_register_custom_post_types_students' );
+add_action( 'init', 'fwd_register_custom_post_types' );
 
 // Taxonomies
 function fwd_register_taxonomies() {
