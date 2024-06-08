@@ -242,4 +242,10 @@ function student_image_size() {
 }
 add_action('after_setup_theme', 'student_image_size');
 
+register_nav_menus(
+    array(
+        'footer-right' => esc_html__( 'Footer - Right Side', 'fwd' ),
+    )
+);
+
 require get_template_directory() . '/inc/cpt-taxonomy.php';
