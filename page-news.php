@@ -16,6 +16,7 @@ get_header(); ?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
+        <h2>News</h2>
 
         <?php
         $news_query = new WP_Query(array(

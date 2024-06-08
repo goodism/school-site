@@ -6,11 +6,13 @@ get_header(); ?>
     <main id="main" class="site-main">
 
         <?php
-        if (function_exists('have_rows') && have_rows('schedule_items')) :
-            echo '<h2>Schedule</h2>';
+        if (function_exists('have_rows') && have_rows('schedule')) :
+            echo '<h2>Course Schedule</h2>';
+            echo '<p>This is the schedule for the upcoming week of classes. It is updated every Sunday evening. Lorem ipsum cras nec dui sodales, congue lacus quis, aliquam ante. Aenean enim nisi, venenatis eu lectus commodo, tristique posuere ligula. Nam velit erat, mollis tincidunt auctor id, hendrerit eget turpis.</p>';
+            echo '<p>Weekly Course Schedule</p>';
             echo '<ul>';
 
-            while (have_rows('schedule_items')) : the_row();
+            while (have_rows('schedule')) : the_row();
                 $date = get_sub_field('date');
                 $course = get_sub_field('course');
                 $instructor = get_sub_field('instructor');
