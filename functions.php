@@ -196,7 +196,7 @@ function block_align_wide() {
 add_action('after_setup_theme', 'block_align_wide');
 
 // Change title placeholder for students
-function wpb_change_title_text( $title ){
+function fwd_change_student_title_text( $title ){
     $screen = get_current_screen();
   
     if  ( 'student' == $screen->post_type ) {
@@ -206,7 +206,7 @@ function wpb_change_title_text( $title ){
     return $title;
 }
   
-add_filter( 'enter_title_here', 'wpb_change_title_text' );
+add_filter( 'enter_title_here', 'fwd_change_student_title_text' );
 
 // CPT
 function fwd_register_custom_post_types() {
@@ -302,21 +302,45 @@ function fwd_create_staff_taxonomy_terms() {
             'Administrative',
             'department'
         );
+// Change staff placeholder text
+function fwd_change_staff_title_placeholder($title) {
+    $screen = get_current_screen();
+    if ($screen->post_type == 'staff') {
+        $title = 'Add staff name';
     }
+    return $title;
 }
-add_action( 'init', 'fwd_create_staff_taxonomy_terms' );
+add_filter('enter_title_here', 'fwd_change_staff_title_placeholder');
 
+// Change excerpt length for student page
+function student_excerpt_length($length) {
+    if (is_archive()) {
+        return 25;
+    }
+    return $length;
+}
+add_filter('excerpt_length', 'student_excerpt_length', 999);
 
+// Change default [...] ending for student page
+function student_excerpt_more( $more ) {
+    if (is_archive()) {
+        $more = '<br> <a href="' . esc_url( get_permalink() ) . '">Read More about the Student...</a>';
+    }
+    return $more;
+}
+add_filter('excerpt_more', 'student_excerpt_more', 999); 
 
+// Custom image size for students
+function student_image_size() {
+    add_image_size( 'student-size', 200, 300, true );
+}
+add_action('after_setup_theme', 'student_image_size');
 
-// function fwd_change_staff_title_placeholder($title) {
-//     $screen = get_current_screen();
-//     if ($screen->post_type == 'staff') {
-//         $title = 'Add staff name';
-//     }
-//     return $title;
-// }
-// add_filter('enter_title_here', 'fwd_change_staff_title_placeholder');
+register_nav_menus(
+    array(
+        'footer-right' => esc_html__( 'Footer - Right Side', 'fwd' ),
+    )
+);
 
 require get_template_directory() . '/inc/cpt-taxonomy.php';
 
